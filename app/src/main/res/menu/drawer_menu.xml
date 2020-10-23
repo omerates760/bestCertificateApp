@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="Home" />
+        <item
+            android:id="@+id/contactFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="Contact" />
+        <item
+            android:id="@+id/myProjectsFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="My Projects" />
+    </group>
+
+    <item android:title="Us">
+        <menu>
+            <item
+                android:id="@+id/shareFragment"
+                android:icon="@drawable/ic_launcher_foreground"
+                android:title="Stars app" />
+
+        </menu>
+    </item>
+
+</menu>
