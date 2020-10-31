@@ -2,52 +2,44 @@ package com.monofire.bestcertificate
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.*
+import android.os.Build
+import android.text.Layout
+import android.text.StaticLayout
+import android.text.StaticLayout.Builder
+import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.annotation.Nullable
+import androidx.core.graphics.values
+import androidx.core.graphics.withMatrix
+import com.monofire.bestcertificate.views.text.Certificate
+import com.monofire.bestcertificate.views.text.CustomText
+import kotlin.math.sqrt
 
 
 class SampleView : View {
 
-    //var mImage: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.canvas)
-    private val SQUARE_SIZE_DEF = 200
+    lateinit var titleText: CustomText
+    lateinit var certificate: Certificate
+    val text = "Certificate of Achievement created by omerates"
+    lateinit var mPaintText: TextPaint
+    lateinit var mStaticLayout: StaticLayout
+    val savedMatrix = Matrix()
+    val borderMatrix = Matrix()
+    lateinit var mRectF: RectF
+    lateinit var mRect: Rect
+    lateinit var border: Rect
+    lateinit var borderColor: Paint
+    var www = 300
+    var hhh = 500
 
-    lateinit var mRectSquare: Rect
+    val www1 = 300
+    val hhh1 = 500
 
-    lateinit var mPaintSquare: Paint
-    lateinit var mPaintCircle: Paint
-    lateinit var mPaintText: Paint
-
-    var mSquareColor: Int = Color.GREEN
-    var mSquareSize: Int = SQUARE_SIZE_DEF
-
-    private var mCircleX: Float = 0.0f
-    private var mCircleY: Float = 0.0f
-    private var mCircleRadius = 100f
-
-    val text = "Merhaba Dünyaaaammmm"
-    lateinit var mRectText: Rect
-    private var mTextX: Float = 200f
-    private var mTextY: Float = 200f
-
-    private lateinit var mImage: Bitmap
-
-    private fun customInit() {
-        viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-
-                viewTreeObserver.removeOnGlobalLayoutListener(this)
-                mImage = getResizeBitmap(mImage, width, height)
-            }
-
-        })
-    }
 
     constructor(context: Context) : super(context) {
         init(null)
@@ -76,136 +68,108 @@ class SampleView : View {
 
     private fun init(@Nullable set: AttributeSet?) {
 
-        Log.e("Drawing0", "$mTextX....$mTextY")
+        ////////////////////////////////////////////////////////////////
 
-        mRectSquare = Rect()
-        mPaintSquare = Paint(Paint.ANTI_ALIAS_FLAG)
-        mPaintSquare.color = Color.GREEN
+        titleText = CustomText()
+        certificate = Certificate(R.drawable.exam, context)
+        mRect = Rect()
+        mPaintText = TextPaint(Paint.ANTI_ALIAS_FLAG)
 
-        mPaintCircle = Paint()
-        mPaintCircle.isAntiAlias = true
-        mPaintCircle.color = Color.parseColor("#00ccff")
+        mPaintText.color = Color.GREEN
+        mPaintText.textSize = 70F
 
-        //İnitialize Some Text
-        mRectText = Rect()
-        mPaintText = Paint()
-        mPaintText.textSize = 50F
-        mPaintText.color = Color.BLACK
+        mRectF = RectF()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mStaticLayout =
+                Builder.obtain(
+                    text.toUpperCase(),
+                    0,
+                    text.length,
+                    mPaintText,
+                    600
+                ).setMaxLines(4)
+                    .setAlignment(Layout.Alignment.ALIGN_CENTER).build()
+        }
+        border = Rect(
+            www - www1,
+            hhh - hhh1,
+            mStaticLayout.width + www - www1,
+            mStaticLayout.height + hhh - hhh1
+        )
+        borderColor = Paint(Paint.ANTI_ALIAS_FLAG)
 
-        mImage = BitmapFactory.decodeResource(resources, R.drawable.canvas)
+        borderColor.style = Paint.Style.STROKE
+        borderColor.color = Color.RED
+        borderColor.strokeWidth = 1.5f
+
+
+        //Certificate change resize while load view.
         viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 viewTreeObserver.removeOnGlobalLayoutListener(this)
-                mImage = getResizeBitmap(mImage, width, height)
-
+                certificate.mImage = certificate.getResizeBitmap(certificate.mImage, width, height)
             }
-
         })
+    }
 
-        if (set == null) return
-        val ta: TypedArray = context.obtainStyledAttributes(set, R.styleable.SampleView)
-        mSquareColor == ta.getColor(R.styleable.SampleView_square_color, Color.GREEN)
-        mSquareSize =
-            ta.getDimension(R.styleable.SampleView_square_size, SQUARE_SIZE_DEF.toFloat()).toInt()
-        mPaintSquare.color = mSquareColor
-        ta.recycle()
+    private fun rectToRectF(rect: Rect): RectF {
+        return RectF(
+            rect.left.toFloat(),
+            rect.top.toFloat(),
+            rect.right.toFloat(),
+            rect.bottom.toFloat()
+        )
+    }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
 
-    fun swapColor() {
-        when (mPaintSquare.color) {
-            mSquareColor -> mPaintSquare.color = Color.RED
-            else -> mPaintSquare.color = mSquareColor
-        }
-        postInvalidate()
-    }
-
-    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas?) {
-        mRectSquare.left = 50
-        mRectSquare.top = 50
-        mRectSquare.right = mRectSquare.left + SQUARE_SIZE_DEF
-        mRectSquare.bottom = mRectSquare.bottom + SQUARE_SIZE_DEF
-        Log.e("state", "tekrar oluştu")
-
-        val imageX = (width - mImage.width) / 2
-        val imageY = (height - mImage.height) / 2
-
         //Drawing image at bitmap
-        canvas?.drawBitmap(mImage, imageX.toFloat(), imageY.toFloat(), null)
+        canvas?.drawBitmap(certificate.mImage, 0f, 0f, null)
 
-        if (mCircleX == 0F || mCircleY == 0F) {
-            mCircleX = (width / 2).toFloat()
-            mCircleY = (height / 2).toFloat()
+        //savedMatrix.mapRect(rectToRectF(mRect))
+        savedMatrix.postTranslate(www.toFloat(), hhh.toFloat())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            canvas?.withMatrix(savedMatrix) {
+                canvas?.drawRect(border, borderColor)
+                mStaticLayout.draw(canvas)
+
+            }
+            //canvas.withMatrix(borderMatrix) {  }
         }
-        //Drawing circle shape
-        canvas?.drawCircle(mCircleX, mCircleY, mCircleRadius, mPaintCircle)
-
-        // Drawing text default location
-
-        //Drawing some text
-        canvas?.drawText(
-            text,
-            mTextX, mTextY,
-            mPaintText
-        )
-        canvas?.drawRect(mRectText, mPaintText)
-        canvas?.drawRect(mRectSquare, mPaintSquare)
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         val value = super.onTouchEvent(event)
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
-                val x = event.x
-                val y = event.y
-                if (mRectSquare.left < x && mRectSquare.right > x) {
-                    if (mRectSquare.top < y && mRectSquare.bottom > y) {
-                        Log.e("nokta", "içerde")
+                Log.e("click1", "${savedMatrix.values().toMutableList()}}")
+                Log.e(
+                    "matrix",
+                    "${border.left}...${border.right}...${border.top}...${border.bottom}"
+                )
 
-                    }
-                }
                 return true
-
             }
+
             MotionEvent.ACTION_MOVE -> {
-                val x = event.x
-                val y = event.y
-                val dx = Math.pow((x - mCircleX).toDouble(), 2.toDouble())
-                val dy = Math.pow((y - mCircleY).toDouble(), 2.toDouble())
-
-                if (dx + dy < Math.pow(mCircleRadius.toDouble(), 2.0)) {
-                    mCircleX = x
-                    mCircleY = y
-                    postInvalidate()
-                    return true
-                }
-
-
+                var currentX = event.x - mStaticLayout.width / 2
+                var currentY = event.y - mStaticLayout.height / 2
+                savedMatrix.reset()
+                www = currentX.toInt()
+                hhh = currentY.toInt()
+                invalidate()
+                return true
             }
         }
         return value
-
     }
 
-    private fun getResizeBitmap(bitmap: Bitmap, reqWidth: Int, reqHeight: Int): Bitmap {
-        val matrix = Matrix()
-        val src = RectF(0F, 0F, bitmap.width.toFloat(), bitmap.height.toFloat())
-        val dst = RectF(0F, 0F, reqWidth.toFloat(), reqHeight.toFloat())
-        matrix.setRectToRect(src, dst, Matrix.ScaleToFit.CENTER)
-        return Bitmap.createBitmap(
-            bitmap,
-            0,
-            0,
-            bitmap.width,
-            bitmap.height,
-            matrix,
-            true
-        )
-    }
 }
