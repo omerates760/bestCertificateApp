@@ -89,7 +89,6 @@ class BoundsView : View {
         mStaticLayout.draw(canvas)
         canvas?.drawText(text, 0, text.length, ww, hh, paintTextPaint)
         canvas?.drawRect(border, borderColor)
-        Log.e("wwwww", "${paintTextPaint.measureText(text)}")
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
