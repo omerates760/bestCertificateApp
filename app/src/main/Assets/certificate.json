@@ -1,0 +1,56 @@
+[
+  {
+    "certificateList": [
+      {
+        "certificateID": "00",
+        "certificateMap": [
+          {
+            "logoMap": 0.0,
+            "titleMap": 0.1,
+            "subTitleMap": 0.2,
+            "descriptionMap": 0.3
+          }
+        ]
+      },
+      {
+        "certificateID": "11",
+        "certificateMap": [
+          {
+            "logoMap": 0.4,
+            "titleMap": 0.5,
+            "subTitleMap": 0.6,
+            "descriptionMap": 0.7
+          }
+        ]
+      }
+    ],
+    "certificateCategory": "sports"
+  },
+  {
+    "certificateList": [
+      {
+        "certificateID": "22",
+        "certificateMap": [
+          {
+            "logoMap": 0.0,
+            "titleMap": 0.1,
+            "subTitleMap": 0.2,
+            "descriptionMap": 0.3
+          }
+        ]
+      },
+      {
+        "certificateID": "33",
+        "certificateMap": [
+          {
+            "logoMap": 0.4,
+            "titleMap": 0.5,
+            "subTitleMap": 0.6,
+            "descriptionMap": 0.7
+          }
+        ]
+      }
+    ],
+    "certificateCategory": "academic"
+  }
+]

@@ -4,40 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
-    android:weightSum="2"
+    android:weightSum="5"
     tools:context=".ui.HomeFragment">
 
-
-    <com.monofire.bestcertificate.SampleView
-        android:id="@+id/customView"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#B7B6B8"
-        app:square_color="@color/squareColor"
-        app:square_size="@dimen/squareSize" />
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:src="@drawable/top_shape" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="LOGO"
+        android:textSize="25sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="3"
+        android:gravity="center"
         android:orientation="vertical">
 
-        <com.monofire.bestcertificate.views.text.BoundsView
-            android:id="@+id/customView1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
         <Button
-            android:id="@+id/btnColor"
+            android:id="@+id/btnStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change"
-            android:visibility="gone" />
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:background="@drawable/btn"
+            android:text="START" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:background="@drawable/btn"
+            android:text="My Certificate" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:background="@drawable/btn"
+            android:text="Contact" />
     </LinearLayout>
-
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/rateus"
+        android:layout_height="0dp"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="center"
+        android:layout_weight="1"
+        android:src="@drawable/bottom_shape" />
 </LinearLayout>

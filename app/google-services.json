@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "284936998514",
+    "firebase_url": "https://bestcertificate-db1a1.firebaseio.com",
+    "project_id": "bestcertificate-db1a1",
+    "storage_bucket": "bestcertificate-db1a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284936998514:android:912a90117f166ce761bceb",
+        "android_client_info": {
+          "package_name": "com.monofire.bestcertificate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "284936998514-f3t72i8fr7aftnrc5v8g74ljtcakm13r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4erswQ06EKqkUyozHFKOL1BWrA3cW85Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "284936998514-f3t72i8fr7aftnrc5v8g74ljtcakm13r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
