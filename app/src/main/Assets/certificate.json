@@ -3,6 +3,7 @@
     "certificateList": [
       {
         "certificateID": "00",
+        "certificateImage":"exam.jpg",
         "certificateMap": [
           {
             "logoMap": 0.0,
@@ -14,6 +15,7 @@
       },
       {
         "certificateID": "11",
+        "certificateImage":"exam.jpg",
         "certificateMap": [
           {
             "logoMap": 0.4,
@@ -30,6 +32,7 @@
     "certificateList": [
       {
         "certificateID": "22",
+        "certificateImage":"thumb.png",
         "certificateMap": [
           {
             "logoMap": 0.0,
@@ -41,6 +44,7 @@
       },
       {
         "certificateID": "33",
+        "certificateImage":"thumb.png",
         "certificateMap": [
           {
             "logoMap": 0.4,
