@@ -19,9 +19,8 @@
             <ImageView
                 android:id="@+id/certificateImage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/thumb" />
+                android:layout_height="250dp"
+                android:scaleType="fitXY" />
 
             <View
                 android:id="@+id/categoryLocked"

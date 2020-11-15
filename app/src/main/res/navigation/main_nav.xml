@@ -26,8 +26,8 @@
         android:label="Categories"
         tools:layout="@layout/fragment_category" >
         <action
-            android:id="@+id/action_categoryFragment_to_editFragment"
-            app:destination="@id/editFragment" />
+            android:id="@+id/action_categoryFragment_to_certificateFragment"
+            app:destination="@id/certificateFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactFragment"
@@ -44,4 +44,13 @@
         android:name="com.monofire.bestcertificate.ui.MyProjectsFragment"
         android:label="Projects"
         tools:layout="@layout/fragment_my_projects" />
+    <fragment
+        android:id="@+id/certificateFragment"
+        android:name="com.monofire.bestcertificate.CertificateFragment"
+        android:label="fragment_certificate"
+        tools:layout="@layout/fragment_certificate" >
+        <action
+            android:id="@+id/action_certificateFragment_to_editFragment"
+            app:destination="@id/editFragment" />
+    </fragment>
 </navigation>
