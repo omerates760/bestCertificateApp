@@ -2,8 +2,9 @@
   {
     "certificateList": [
       {
-        "certificateID": "00",
-        "certificateImage":"exam.jpg",
+        "certificateId": "00",
+        "certificateImage": "exam.jpg",
+        "isLocked": true,
         "certificateMap": [
           {
             "logoMap": 0.0,
@@ -14,8 +15,9 @@
         ]
       },
       {
-        "certificateID": "11",
-        "certificateImage":"exam.jpg",
+        "certificateId": "11",
+        "certificateImage": "thumb.png",
+        "isLocked": false,
         "certificateMap": [
           {
             "logoMap": 0.4,
@@ -26,14 +28,15 @@
         ]
       }
     ],
-    "categoryId": "asdasd",
+    "categoryId": "asgddggdffgddasd",
     "certificateCategory": "sports"
   },
   {
     "certificateList": [
       {
-        "certificateID": "22",
-        "certificateImage":"thumb.png",
+        "certificateId": "22",
+        "certificateImage": "thumb.png",
+        "isLocked": true,
         "certificateMap": [
           {
             "logoMap": 0.0,
@@ -44,8 +47,9 @@
         ]
       },
       {
-        "certificateID": "33",
-        "certificateImage":"thumb.png",
+        "certificateId": "33",
+        "certificateImage": "exam.jpg",
+        "isLocked": true,
         "certificateMap": [
           {
             "logoMap": 0.4,
@@ -56,7 +60,7 @@
         ]
       }
     ],
-    "categoryId": "asdasd",
+    "categoryId": "asdasdwegwregewg",
     "certificateCategory": "academic"
   }
 ]

@@ -8,18 +8,16 @@ import java.io.IOException
 
 class LocalDatabase(private val context: Context) {
     private var arr = mutableListOf<Certificate>()
-    private var json = ""
-
-    init {
-        readFile()
-    }
+    private val data = getJsonDataFromAsset(context, "certificate.json")
+    private val listPersonType = object : TypeToken<List<Certificate>>() {}.type
 
     fun readFile(): MutableList<Certificate> {
-        val data = getJsonDataFromAsset(context, "certificate.json")
+        arr = Gson().fromJson(data, listPersonType)
+        return arr
+    }
 
-        val listPersonType = object : TypeToken<List<Certificate>>() {}.type
-        var persons: MutableList<Certificate> = Gson().fromJson(data, listPersonType)
-        return persons
+    fun readSelectedCertificateList(certificateId: String): MutableList<Certificate> {
+        return arr.filter { certificate -> certificate.categoryId == certificateId } as MutableList<Certificate>
     }
 
     fun getJsonDataFromAsset(context: Context, fileName: String): String? {

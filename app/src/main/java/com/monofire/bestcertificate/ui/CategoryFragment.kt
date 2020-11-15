@@ -38,6 +38,7 @@ class CategoryFragment : Fragment() {
     private fun loadCertificate() {
         localDatabase = LocalDatabase(requireContext())
         val liste = localDatabase.readFile()
+
         adapters = CategoryAdapter(liste)
 
         binding.recyclerviewCategory.apply {

@@ -1,22 +1,19 @@
 package com.monofire.bestcertificate.ui.adapter
 
-import android.content.Context
-import android.graphics.Color
+import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.annotation.NonNull
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.monofire.bestcertificate.R
-import com.monofire.bestcertificate.databinding.ItemCategoryBinding
+import com.monofire.bestcertificate.databinding.ItemCategorySelectBinding
 import com.monofire.bestcertificate.models.Certificate
 
 class CategoryAdapter(private val list: MutableList<Certificate>) :
     RecyclerView.Adapter<CategoryAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemBinding =
-            ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemCategorySelectBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(itemBinding)
     }
 
@@ -27,12 +24,15 @@ class CategoryAdapter(private val list: MutableList<Certificate>) :
 
     override fun getItemCount(): Int = list.size
 
-    class MyViewHolder(private val rowBinding: ItemCategoryBinding) :
+    class MyViewHolder(private val rowBinding: ItemCategorySelectBinding) :
         RecyclerView.ViewHolder(rowBinding.root) {
         fun bind(certificate: Certificate) {
-            rowBinding.certificateImage.setImageResource(R.drawable.thumb)
-
-            rowBinding.categoryLocked.visibility = View.VISIBLE
+            rowBinding.categoryName.text = certificate.certificateCategory
+            rowBinding.categoryName.setOnClickListener {
+                val bundle=Bundle()
+                bundle.putString("categoryId",certificate.categoryId)
+                findNavController(rowBinding.root).navigate(R.id.action_categoryFragment_to_certificateFragment,bundle)
+            }
         }
 
     }
