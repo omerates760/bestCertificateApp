@@ -3,6 +3,7 @@ package com.monofire.bestcertificate.save
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.monofire.bestcertificate.models.LayoutTranslate
 import com.monofire.bestcertificate.models.SelectedText
 import com.monofire.bestcertificate.models.Text
 
@@ -41,7 +42,9 @@ object SharedText {
             context.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
         val gson = Gson()
         val getData = sharedPreferences.getString("sharedTextProperties", "")
+
         return gson.fromJson(getData, SelectedText::class.java)
+
     }
 
 }

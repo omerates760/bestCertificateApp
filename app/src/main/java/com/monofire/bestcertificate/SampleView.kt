@@ -12,9 +12,12 @@ import android.view.View
 import android.view.ViewTreeObserver
 import androidx.annotation.Nullable
 import androidx.core.graphics.withMatrix
+import com.google.gson.Gson
 import com.monofire.bestcertificate.models.CertificateItem
 import com.monofire.bestcertificate.models.LayoutTranslate
+import com.monofire.bestcertificate.models.SelectedText
 import com.monofire.bestcertificate.models.Text
+import com.monofire.bestcertificate.save.SharedText
 import com.monofire.bestcertificate.views.text.Certificate
 import com.monofire.bestcertificate.views.text.CustomTextView
 
@@ -161,6 +164,7 @@ class SampleView : View {
                     savedMatrix.reset()
                     invalidate()
                     isVisible = true
+
                 } else {
                     titleText.isVisible = false
                     titleText.createTextLayoutBorder()
@@ -174,6 +178,16 @@ class SampleView : View {
             }
             MotionEvent.ACTION_UP -> {
                 isVisible = false
+                Log.e("nokta", "${event.x}...${event.y}")
+                val ss =
+                    SelectedText(
+                        "deneme",
+                        LayoutTranslate(
+                            event.x.toInt() - titleText.staticLayout.width / 2,
+                            event.y.toInt() - titleText.staticLayout.height / 2
+                        )
+                    )
+                SharedText.editTextProperties(context, ss)
                 return true
             }
 
@@ -214,15 +228,18 @@ class SampleView : View {
         titleText = CustomTextView(title, titleTranslate)
     }
 
-    fun changeCustomText(item: String) {
+    fun changeCustomText(item: SelectedText) {
         val paint = TextPaint(Paint.ANTI_ALIAS_FLAG)
         paint.textSize = 45f
         paint.color = Color.BLUE
 
+        titleTranslate.translateX = item.layoutTranslate.translateX
+        titleTranslate.translateY = item.layoutTranslate.translateY
         val typeface: Typeface =
             Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.otf")
+        Log.e("nokta", "${item.layoutTranslate.translateX}...${item.layoutTranslate.translateY}")
 
-        val title = Text(item, typeface, "Title", paint)
+        val title = Text(item.text, typeface, "Title", paint)
         titleText = CustomTextView(title, titleTranslate)
         invalidate()
     }

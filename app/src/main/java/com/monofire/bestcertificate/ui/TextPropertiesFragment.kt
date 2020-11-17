@@ -47,7 +47,7 @@ class TextPropertiesFragment : DialogFragment() {
         binding.btnDone.setOnClickListener {
             val bundle = Bundle()
             bundle.putBoolean("fromProperties", true)
-            bundle.putString("setText","Bu metin düzenlenmiş bir metindir.Değiştiren omer ates dir.saygılar")
+            bundle.putString("setText","Lorem ipsum")
             findNavController().navigate(R.id.action_textPropertiesFragment_to_editFragment, bundle)
         }
 

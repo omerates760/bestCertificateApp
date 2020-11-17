@@ -13,6 +13,7 @@ import com.monofire.bestcertificate.SampleView
 import com.monofire.bestcertificate.databinding.FragmentEditBinding
 import com.monofire.bestcertificate.db.LocalDatabase
 import com.monofire.bestcertificate.models.CertificateItem
+import com.monofire.bestcertificate.models.SelectedText
 import com.monofire.bestcertificate.save.SharedText
 import com.monofire.bestcertificate.ui.adapter.CategoryAdapter
 import kotlinx.android.synthetic.main.fragment_edit.*
@@ -48,7 +49,12 @@ class EditFragment : Fragment() {
         }
         if (arguments?.getBoolean("fromProperties") == true) {
             sampleView = SampleView(requireContext())
-            sampleView.changeCustomText(arguments?.getString("setText").toString())
+            val textProperty = SelectedText(
+                arguments?.getString("setText").toString(), SharedText.getTextProperties(
+                    requireContext()
+                )!!.layoutTranslate
+            )
+            sampleView.changeCustomText(textProperty)
             binding.container.addView(sampleView)
         } else {
             certificateProperties = gson.fromJson(
