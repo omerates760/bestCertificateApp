@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.monofire.bestcertificate.R
 import com.monofire.bestcertificate.databinding.ItemCategoryBinding
 import com.monofire.bestcertificate.models.CertificateItem
@@ -39,7 +40,6 @@ class CertificateAdapter(
     ) :
         RecyclerView.ViewHolder(rowBinding.root) {
         fun bind(certificate: CertificateItem) {
-
             val xx: InputStream =
                 rowBinding.root.context.assets.open(certificate.certificateImage)
             /* val stream =
@@ -61,10 +61,11 @@ class CertificateAdapter(
                     rowBinding.categoryLocked.visibility = View.INVISIBLE
                     rowBinding.categoryLockedIcon.visibility = View.INVISIBLE
                     rowBinding.certificateImage.setOnClickListener {
-                        Log.e("result", "Bu sertifika ücretsizdir.")
+                        val gson = Gson()
+                        val json = gson.toJson(certificate)
                         val bundle = Bundle()
                         bundle.putString("categoryId", categoryId)
-                        bundle.putString("certificateId", certificate.certificateId)
+                        bundle.putString("certificateProperties", json)
                         Navigation.findNavController(rowBinding.root)
                             .navigate(R.id.action_certificateFragment_to_editFragment, bundle)
                     }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SampleView">
-        <attr name="square_color" format="color" />
-        <attr name="square_size" format="dimension" />
+        <attr name="title_color" format="color" />
     </declare-styleable>
 
 </resources>

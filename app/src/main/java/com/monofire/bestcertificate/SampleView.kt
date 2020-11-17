@@ -3,9 +3,7 @@ package com.monofire.bestcertificate
 import android.content.Context
 import android.graphics.*
 import android.os.Build
-import android.text.Layout
 import android.text.StaticLayout
-import android.text.StaticLayout.Builder
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.Log
@@ -13,8 +11,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.annotation.Nullable
-import androidx.core.graphics.values
 import androidx.core.graphics.withMatrix
+import com.monofire.bestcertificate.models.CertificateItem
 import com.monofire.bestcertificate.models.LayoutTranslate
 import com.monofire.bestcertificate.models.Text
 import com.monofire.bestcertificate.views.text.Certificate
@@ -24,22 +22,26 @@ import com.monofire.bestcertificate.views.text.CustomTextView
 class SampleView : View {
 
     lateinit var titleText: CustomTextView
-    lateinit var certificate: Certificate
-    val text = "Certificate of Achievement created by omerates"
-    lateinit var mPaintText: TextPaint
-    lateinit var mStaticLayout: StaticLayout
-    val savedMatrix = Matrix()
+    lateinit var SubTitleText: CustomTextView
 
-    lateinit var mRectF: RectF
-    lateinit var mRect: Rect
-    lateinit var border: Rect
-    lateinit var borderColor: Paint
-    var isVisible = false
-    var www = 400
-    var hhh = 200
+    private lateinit var certificate: Certificate
+    var text = "Certificate of Achievement created by omerates"
+    private lateinit var mPaintText: TextPaint
+    private lateinit var mStaticLayout: StaticLayout
+    private val savedMatrix = Matrix()
 
-    val www1 = 400
-    val hhh1 = 200
+    private lateinit var mRectF: RectF
+    private lateinit var mRect: Rect
+    private lateinit var border: Rect
+    private lateinit var borderColor: Paint
+    private var isVisible = false
+    private var www = 400
+    private var hhh = 200
+
+    private val www1 = 400
+    private val hhh1 = 200
+    var titleTranslate = LayoutTranslate()
+    lateinit var item: CertificateItem
 
 
     constructor(context: Context) : super(context) {
@@ -47,7 +49,7 @@ class SampleView : View {
     }
 
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
-        init(attributeSet)
+        init(null)
     }
 
     constructor(context: Context, attributeSet: AttributeSet, defStyle: Int) : super(
@@ -55,7 +57,7 @@ class SampleView : View {
         attributeSet,
         defStyle
     ) {
-        init(attributeSet)
+        init(null)
     }
 
     constructor(
@@ -64,22 +66,20 @@ class SampleView : View {
         defStyle: Int,
         defStyleRes: Int
     ) : super(context, attributeSet, defStyle, defStyleRes) {
-        init(attributeSet)
+        init(null)
     }
 
-    private fun init(@Nullable set: AttributeSet?) {
-        val paint = TextPaint(Paint.ANTI_ALIAS_FLAG)
-        paint.textSize = 45f
-        paint.color = Color.BLUE
+    constructor(context: Context, item: CertificateItem) : super(context) {
+        this.item = item
+        init(item)
 
-        val typeface: Typeface = Typeface.create("asasa", Typeface.NORMAL)
-        val title = Text("Merhaba ben Ömer Ateş. Uygulama Başarılı. Umarım ileride başarılı bir sertifika uygulaması olacaktır.İnanıyorum ben.", typeface, "Title", paint)
-        val titleTranslate = LayoutTranslate(450, 600)
-        titleText = CustomTextView(title, titleTranslate)
+    }
+
+    private fun init(@Nullable set: CertificateItem?) {
+        defaultCustomText(set)
+        certificate = Certificate(R.drawable.exam, context)
 
         ////////////////////////////////////////////////////////////////
-
-        certificate = Certificate(R.drawable.exam, context)
         /* mRect = Rect()
          mPaintText = TextPaint(Paint.ANTI_ALIAS_FLAG)
 
@@ -121,6 +121,7 @@ class SampleView : View {
         })
     }
 
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
     }
@@ -133,8 +134,8 @@ class SampleView : View {
         //Drawing image at bitmap
         canvas?.drawBitmap(certificate.mImage, 0f, 0f, null)
         savedMatrix.postTranslate(
-            titleText.translate.translateX.toFloat(),
-            titleText.translate.translateY.toFloat()
+            titleText.translate.translateX!!.toFloat(),
+            titleText.translate.translateY!!.toFloat()
         )
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -155,9 +156,16 @@ class SampleView : View {
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
                 if (titleText.textBorder.rect.left < event.x && titleText.textBorder.rect.right > event.x && titleText.textBorder.rect.top < event.y && titleText.textBorder.rect.bottom > event.y) {
-                    Log.e("durum", "içerde")
+                    titleText.isVisible = true
+                    titleText.createTextLayoutBorder()
+                    savedMatrix.reset()
+                    invalidate()
                     isVisible = true
                 } else {
+                    titleText.isVisible = false
+                    titleText.createTextLayoutBorder()
+                    savedMatrix.reset()
+                    invalidate()
                     isVisible = false
                     Log.e("durum", "dışarda")
                 }
@@ -188,5 +196,36 @@ class SampleView : View {
         }
         return value
     }
+
+    fun defaultCustomText(set: CertificateItem?) {
+        val paint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        paint.textSize = 45f
+        paint.color = Color.BLUE
+
+        val typeface: Typeface =
+            Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.otf")
+
+        val title = Text(text, typeface, "Title", paint)
+
+        set?.certificateMap?.forEach { map ->
+            titleTranslate.translateX = map.logoMapX.toInt()
+            titleTranslate.translateY = map.logoMapY.toInt()
+        }
+        titleText = CustomTextView(title, titleTranslate)
+    }
+
+    fun changeCustomText(item: String) {
+        val paint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        paint.textSize = 45f
+        paint.color = Color.BLUE
+
+        val typeface: Typeface =
+            Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.otf")
+
+        val title = Text(item, typeface, "Title", paint)
+        titleText = CustomTextView(title, titleTranslate)
+        invalidate()
+    }
+
 
 }

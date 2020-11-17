@@ -35,7 +35,6 @@ class CertificateFragment : Fragment() {
 
         categoryId = arguments?.getString("categoryId", "boş").toString()
         loadCertificates()
-        Log.e("liste", "" + categoryId)
     }
 
     private fun loadCertificates() {

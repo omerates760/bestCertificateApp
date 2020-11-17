@@ -38,7 +38,11 @@
         android:id="@+id/editFragment"
         android:name="com.monofire.bestcertificate.ui.EditFragment"
         android:label="Editting"
-        tools:layout="@layout/fragment_edit" />
+        tools:layout="@layout/fragment_edit" >
+        <action
+            android:id="@+id/action_editFragment_to_textPropertiesFragment"
+            app:destination="@id/textPropertiesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myProjectsFragment"
         android:name="com.monofire.bestcertificate.ui.MyProjectsFragment"
@@ -51,6 +55,14 @@
         tools:layout="@layout/fragment_certificate" >
         <action
             android:id="@+id/action_certificateFragment_to_editFragment"
+            app:destination="@id/editFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/textPropertiesFragment"
+        android:name="com.monofire.bestcertificate.ui.TextPropertiesFragment"
+        android:label="TextPropertiesFragment" >
+        <action
+            android:id="@+id/action_textPropertiesFragment_to_editFragment"
             app:destination="@id/editFragment" />
     </fragment>
 </navigation>
