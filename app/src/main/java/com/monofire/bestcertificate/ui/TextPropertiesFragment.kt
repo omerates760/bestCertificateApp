@@ -21,7 +21,6 @@ import com.monofire.bestcertificate.models.SelectedText
 class TextPropertiesFragment : DialogFragment() {
     private var _binding: FragmentTextPropertiesBinding? = null
     private val binding get() = _binding!!
-    private var tempToolbar: Toolbar? = null
     private var args: String = ""
     private val gson = Gson()
 
@@ -47,8 +46,16 @@ class TextPropertiesFragment : DialogFragment() {
         binding.btnDone.setOnClickListener {
             val bundle = Bundle()
             bundle.putBoolean("fromProperties", true)
-            bundle.putString("setText","Lorem ipsum")
+            bundle.putString("setText", "Lorem ipsum")
             findNavController().navigate(R.id.action_textPropertiesFragment_to_editFragment, bundle)
+        }
+        binding.textEdit.setOnClickListener {
+            binding.customEditText.setText("selamlar.çok başarılı bir durum")
+            //binding.customEditText.invalidate()
+            //binding.customEditText.requestLayout()
+        }
+        binding.textSize.setOnClickListener {
+            binding.customEditText.textSize=30F
         }
 
 /*      when (whichPage) {

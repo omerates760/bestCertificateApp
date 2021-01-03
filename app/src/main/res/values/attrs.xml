@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="CustomEdittext">
+        <attr name="title" format="string" >
+        </attr>
+        <attr name="title_position" format="integer">
+            <enum name="small" value="15"/>
+            <enum name="middle" value="30"/>
+        </attr>
+    </declare-styleable>
     <declare-styleable name="SampleView">
-        <attr name="title_color" format="color" />
+        <attr name="setTitle" format="string"/>
     </declare-styleable>
 
 </resources>

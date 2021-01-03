@@ -1,6 +1,7 @@
 package com.monofire.bestcertificate.ui
 
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,14 +18,15 @@ import com.monofire.bestcertificate.models.SelectedText
 import com.monofire.bestcertificate.save.SharedText
 import com.monofire.bestcertificate.ui.adapter.CategoryAdapter
 import kotlinx.android.synthetic.main.fragment_edit.*
+import java.util.jar.Attributes
 
 class EditFragment : Fragment() {
     private var _binding: FragmentEditBinding? = null
     private val binding get() = _binding!!
     private lateinit var localDatabase: LocalDatabase
     private lateinit var adapters: CategoryAdapter
-    lateinit var certificateProperties: CertificateItem
-    lateinit var sampleView: SampleView
+    //lateinit var certificateProperties: CertificateItem
+    //lateinit var sampleView: SampleView
     private val gson = Gson()
 
 
@@ -39,15 +41,25 @@ class EditFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+/*
+        certificateProperties = gson.fromJson(
+            arguments?.getString("certificateProperties", ""),
+            CertificateItem::class.java
+        )
+
+        sampleView = SampleView(requireContext(), certificateProperties)*/
+
 
         binding.btnText.setOnClickListener {
-            SharedText.getTextProperties(requireContext())
-            val bundle = Bundle()
-            bundle.putString("selectedProperty", "text")
-            findNavController().navigate(R.id.action_editFragment_to_textPropertiesFragment, bundle)
+        sampleView.setTextString("denemeeee")
+
+            //SharedText.getTextProperties(requireContext())
+            //val bundle = Bundle()
+            //bundle.putString("selectedProperty", "text")
+            //findNavController().navigate(R.id.action_editFragment_to_textPropertiesFragment, bundle)
 
         }
-        if (arguments?.getBoolean("fromProperties") == true) {
+      /*  if (arguments?.getBoolean("fromProperties") == true) {
             sampleView = SampleView(requireContext())
             val textProperty = SelectedText(
                 arguments?.getString("setText").toString(), SharedText.getTextProperties(
@@ -65,7 +77,7 @@ class EditFragment : Fragment() {
             binding.container.addView(sampleView)
 
 
-        }
+        }*/
 
     }
 }

@@ -26,6 +26,9 @@ class HomeFragment : Fragment() {
         binding.btnStart.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
         }
+        binding.myProjects.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_myProjectsFragment)
+        }
 
     }
 

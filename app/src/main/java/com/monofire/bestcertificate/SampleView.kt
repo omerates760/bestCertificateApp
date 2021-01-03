@@ -1,6 +1,7 @@
 package com.monofire.bestcertificate
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.*
 import android.os.Build
 import android.text.StaticLayout
@@ -12,7 +13,6 @@ import android.view.View
 import android.view.ViewTreeObserver
 import androidx.annotation.Nullable
 import androidx.core.graphics.withMatrix
-import com.google.gson.Gson
 import com.monofire.bestcertificate.models.CertificateItem
 import com.monofire.bestcertificate.models.LayoutTranslate
 import com.monofire.bestcertificate.models.SelectedText
@@ -52,6 +52,10 @@ class SampleView : View {
     }
 
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
+    /*    val a: TypedArray =
+            context.obtainStyledAttributes(attributeSet, R.styleable.SampleView)
+        text = a.getString(R.styleable.SampleView_changeTitle)!!
+        a.recycle()*/
         init(null)
     }
 
@@ -60,6 +64,8 @@ class SampleView : View {
         attributeSet,
         defStyle
     ) {
+
+
         init(null)
     }
 
@@ -81,38 +87,6 @@ class SampleView : View {
     private fun init(@Nullable set: CertificateItem?) {
         defaultCustomText(set)
         certificate = Certificate(R.drawable.exam, context)
-
-        ////////////////////////////////////////////////////////////////
-        /* mRect = Rect()
-         mPaintText = TextPaint(Paint.ANTI_ALIAS_FLAG)
-
-         mPaintText.color = Color.GREEN
-         mPaintText.textSize = 70F
-
-         mRectF = RectF()
-         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-             mStaticLayout =
-                 Builder.obtain(
-                     text.toUpperCase(),
-                     0,
-                     text.length,
-                     mPaintText,
-                     600
-                 ).setMaxLines(4)
-                     .setAlignment(Layout.Alignment.ALIGN_CENTER).build()
-         }
-         border = Rect(
-             www - www1,
-             hhh - hhh1,
-             mStaticLayout.width + www - www1,
-             mStaticLayout.height + hhh - hhh1
-         )
-         borderColor = Paint(Paint.ANTI_ALIAS_FLAG)
-
-         borderColor.style = Paint.Style.STROKE
-         borderColor.color = Color.RED
-         borderColor.strokeWidth = 1.5f
- */
 
         //Certificate change resize while load view.
         viewTreeObserver.addOnGlobalLayoutListener(object :
@@ -211,9 +185,16 @@ class SampleView : View {
         return value
     }
 
+    fun setTextString(stt: String) {
+        text = stt
+        savedMatrix.reset()
+        invalidate()
+
+    }
+
     fun defaultCustomText(set: CertificateItem?) {
         val paint = TextPaint(Paint.ANTI_ALIAS_FLAG)
-        paint.textSize = 45f
+        paint.textSize = 50f
         paint.color = Color.BLUE
 
         val typeface: Typeface =

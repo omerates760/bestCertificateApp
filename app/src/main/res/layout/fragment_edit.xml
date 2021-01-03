@@ -8,12 +8,12 @@
     android:weightSum="3"
     tools:context=".ui.EditFragment">
 
-<LinearLayout
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="2"
-    android:orientation="vertical" />
+    <com.monofire.bestcertificate.SampleView
+        android:id="@+id/sampleView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:setTitle="merhaba ben meroo"
+        android:layout_weight="2"/>
 
 
     <Button

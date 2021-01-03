@@ -4,22 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="0dp">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/saveToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:paddingStart="6dp"
-            android:paddingEnd="16dp"
-            app:titleTextColor="@color/colorPink"
-            app:contentInsetStartWithNavigation="0dp" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,25 +13,49 @@
         android:weightSum="4"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
+        <com.monofire.bestcertificate.views.text.CustomEdittext
+            android:id="@+id/customEditText"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:title="deneme"
+            app:title_position="5" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:weightSum="5">
 
             <Button
                 android:id="@+id/btnDone"
                 style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:paddingTop="15dp"
-                android:textSize="25sp"
                 android:paddingBottom="15dp"
-                android:text="Ekle" />
+                android:text="Ekle"
+                android:textSize="25sp" />
+            <Button
+                android:id="@+id/text_Edit"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="edit"
+                android:textSize="25sp" />
+            <Button
+                android:id="@+id/text_size"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="size" />
 
         </LinearLayout>
 
