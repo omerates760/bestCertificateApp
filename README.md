@@ -3,7 +3,17 @@
 
 
 <h2 id="Outputs">Proje sunum videosu</h2>
+<video width="320" height="240" autoplay>
+  <source src="https://drive.google.com/file/d/1BE-VGcyLMdS7OP779yjktnDOxaGilq52/view?usp=sharing" type="video/mp4">
+</video>
+
+<h2 id="Outputs">Proje Tasarım çalışması</h2>
+
 <p><img height= "400" src="https://monofire760.github.io/recipe-category-image/image/home.png" alt="home" />
-<img height= "200" src="https://user-images.githubusercontent.com/22769589/73372162-ce94ba00-42c7-11ea-9100-642953ec9c7e.gif" alt="Gif2" />
-<img height= "200" src="https://user-images.githubusercontent.com/22769589/68296812-82f6b980-00a6-11ea-946b-ede239a4446a.gif" alt="Gif3" />
-<img height= "200" src="https://user-images.githubusercontent.com/22769589/68296815-838f5000-00a6-11ea-86ed-8587458d2bb2.gif" alt="Gif4" /></p>
+  <img height= "400" src="https://monofire760.github.io/recipe-category-image/image/category.png" alt="home" />
+  <img height= "400" src="https://monofire760.github.io/recipe-category-image/image/contact.png" alt="home" />
+  <img height= "400" src="https://monofire760.github.io/recipe-category-image/image/Edit.png" alt="home" />
+  <img height= "400" src="https://monofire760.github.io/recipe-category-image/image/Send.png" alt="home" />
+  <img height= "400" src="https://monofire760.github.io/recipe-category-image/image/bottomSheet.png" alt="home" />
+
+</p>
